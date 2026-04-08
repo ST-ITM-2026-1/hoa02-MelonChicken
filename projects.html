@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Junu's Projects</title>
+    <link rel="stylesheet" href="css/themePalatte.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/projects.css">
+    <!-- this is for add imoji's and fonts -->
+    <!-- https://fontawesome.com/s -->
+    <script src="https://kit.fontawesome.com/8da0f3b785.js" crossorigin="anonymous"></script>
+    <!-- https://noonnu.cc/font_page/845 -->
+    <link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUIT@2/fonts/static/woff2/SUIT.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- header for page navigation and my awesome name and logo -->
+    <header>
+        <nav>
+            <!-- For user experience, I made logo also works as the navigation for home -->
+            <a href="./index.html">
+                <h1><i class="fa-solid fa-flask-vial"></i> Junu's Lab </h1>
+            </a>
+            <div>
+                <a href="./index.html">Home</a>
+                <a href="./projects.html" id="currentTab">Projects</a>
+                <a href="./skills.html">Skills</a>
+                <a href="./contact.html">Contact</a>
+            </div>
+        </nav>
+    </header>
+    <!-- main content for this page -->
+    <main>
+        <!-- container for title, description -->
+        <section class="infoContainer">
+            <div class="textContainer">
+                <h3>— RESEARCH AND ENGINEERING</h3>
+                <h2>Featured Projects</h2>
+                <p>Services, systems, research projects, and experimental builds <br> — grounded in real technical
+                    challenges
+                    and practical exploration</p>
+            </div>
+            <div class="buttonContainer">
+                <a
+                    href="https://www.notion.so/ml-c/22614b84a0f280309de1c5d3fc2798cb?v=25d14b84a0f28018a392000c031c0094&source=copy_link">
+                    See all works in Notion ⇾</a>
+            </div>
+        </section>
+        <!-- container for featured projects list -->
+        <!-- Since there is no js, the contents will be hard-coded. -->
+        <!-- TODO: apply js and get real project information with GitHub REST API -->
+        <section class="projectContainer">
+            <div class="cardDeck">
+                <div class="card">
+                    <div class="cardContent">
+                        <span class="cardTitleLine">
+                            <h3>Site-Generalized Wildlife Classifier</h3>
+                            <span>
+                                <i class="fa-solid fa-eye"></i>
+                            </span>
+                        </span>
+                        <p>A learning CV project that classifies camera-trap images using HOG + scikit-learn
+                            probabilistic
+                            models, validated with site-grouped CV and completed through a full submission cycle.</p>
+                        <p class="roles">Solo: data • model • CV design</p>
+                        <span class="stacks">
+                            <p>Python</p>
+                            <p>Scikit-learn</p>
+                            <p>Scikit-image</p>
+                            <p>OpenCV</p>
+                        </span>
+                    </div>
+
+                    <div class="result">
+                        <div class="dot"></div>
+                        <p>Local CV best (mean log loss): 1.8197 (355/582)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="cardDeck">
+                <div class="card">
+                    <div class="cardContent">
+
+                        <span class="cardTitleLine">
+                            <h3>Research Radar</h3>
+                            <span>
+                                <i class="fa-solid fa-chart-line"></i>
+                            </span>
+                        </span>
+                        <p>AI Market Intelligence Dashboard, Automated exploration system converting consulting research
+                            into opportunities.</p>
+                        <p class="roles">Solo: Full-stack Dev • Data Analysis • Project Management</p>
+                        <span class="stacks">
+                            <p>Python</p>
+                            <p>FastAPI</p>
+                            <p>OpenAI API</p>
+                            <p>NLP</p>
+                        </span>
+                    </div>
+                    <div class="result">
+                        <div class="dot"></div>
+                        <p>Developed a prototype of AI-powered market insight automation dashboard</p>
+                    </div>
+                </div>
+            </div>
+            <div class="cardDeck">
+                <div class="card">
+                    <div class="cardContent">
+                        <span class="cardTitleLine">
+                            <h3>F1 QNA Bot</h3>
+                            <span>
+                                <i class="fas fa-robot"></i>
+                            </span>
+                        </span>
+                        <p>Chatbot that uses RAG to answer complex F1 regulations and racing data in a simple,
+                            searchable way.</p>
+                        <p class="roles">Built RAG-based Chatbot Pipeline</p>
+                        <span class="stacks">
+                            <p>Python</p>
+                            <p>PyTorch</p>
+                            <p>LLM</p>
+                        </span>
+                    </div>
+                    <div class="result">
+                        <div class="dot"></div>
+                        <p>Provides accurate answers to F1-related queries (in progress)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="cardDeck">
+                <div class="card">
+                    <div class="cardContent">
+                        <span class="cardTitleLine">
+                            <h3>ITM Notification</h3>
+                            <span>
+                                <i class="fas fa-bell"></i>
+                            </span>
+                        </span>
+                        <p>Automatic notification system that delivers school announcements in real time.</p>
+                        <p class="roles">Python Bot Dev &amp; Discord Integration</p>
+                        <span class="stacks">
+                            <p>Python</p>
+                            <p>FastAPI</p>
+                            <p>Discord API</p>
+                        </span>
+                    </div>
+                    <div class="result">
+                        <div class="dot"></div>
+                        <p>Increased engagement and visibility through real-time announcement alerts</p>
+                    </div>
+                </div>
+            </div>
+            <div class="cardDeck">
+                <div class="card">
+                    <div class="cardContent">
+                        <span class="cardTitleLine">
+                            <h3>GovPulse</h3>
+                            <span>
+                                <i class="fas fa-server"></i>
+                            </span>
+                        </span>
+                        <p>Dashboard that visualizes government server failures and recovery status in real time.</p>
+                        <p class="roles">FastAPI Backend &amp; Monitoring Dashboard</p>
+                        <span class="stacks">
+                            <p>FastAPI</p>
+                            <p>Python</p>
+                        </span>
+                    </div>
+                    <div class="result">
+                        <div class="dot"></div>
+                        <p>Deployed a real-time service for tracking and visualizing server recovery status</p>
+                    </div>
+                </div>
+            </div>
+            <div class="cardDeck">
+                <div class="card">
+                    <div class="cardContent">
+                        <span class="cardTitleLine">
+                            <h3>HaBi</h3>
+                            <span>
+                                <i class="fas fa-calendar-check"></i>
+                            </span>
+                        </span>
+                        <p>Service prototype for integrating and managing schedules scattered across multiple apps.</p>
+                        <p class="roles">Flutter App Dev &amp; Backend Integration</p>
+                        <span class="stacks">
+                            <p>Flutter</p>
+                            <p>FastAPI</p>
+                        </span>
+                    </div>
+                    <div class="result">
+                        <div class="dot"></div>
+                        <p>Built an integrated schedule management prototype (archived)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="cardDeck">
+                <div class="card">
+                    <div class="cardContent">
+                        <span class="cardTitleLine">
+                            <h3>Smart Bath</h3>
+                            <span>
+                                <i class="fas fa-bath"></i>
+                            </span>
+                        </span>
+                        <p>Integrated platform that helps users and caregivers easily explore visiting bath services.
+                        </p>
+                        <p class="roles">Frontend Dev &amp; Platform Architecture</p>
+                        <span class="stacks">
+                            <p>React</p>
+                            <p>TypeScript</p>
+                            <p>Firebase</p>
+                        </span>
+                    </div>
+                    <div class="result">
+                        <div class="dot"></div>
+                        <p>Reduced search time and improved accessibility for visiting bath service information</p>
+                    </div>
+                </div>
+            </div>
+            <div class="cardDeck"></div>
+        </section>
+    </main>
+    <!-- footer to indicate the information of this site -->
+    <footer>
+        <section>
+
+            <p>Junu's lab portfolio 2.1.0.</p>
+            <p>&copy; 2026 Junu Kim. All rights reserved.</p>
+            <p>Email: m.l02n23@gmail.com</p>
+            <p>
+                <a href="https://github.com/MelonChicken"><i class="fa-brands fa-github"></i></a>
+            </p>
+        </section>
+    </footer>
+</body>
