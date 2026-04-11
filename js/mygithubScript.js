@@ -1,9 +1,8 @@
 document.addEventListener("DOMContentLoaded", init);
 
 const baseUrl = 'https://api.github.com/users/MelonChicken';
-let reposUrl;
-let reposList;
 let profileData;
+let reposUrl;
 /**
  * The function to load GitHub Data and GitHub Repositories list
  */
@@ -11,25 +10,22 @@ function init() {
     fetch(baseUrl)
         .then(response => response.json())
         .then(profileData => {
-            console.log(profileData);
+            // console.log(profileData);
             // sort by the updated date
             //https://docs.github.com/en/rest/repos/repos?utm_source=chatgpt.com&apiVersion=2026-03-10 
             reposUrl = `${profileData.repos_url}?sort=updated&direction=desc`
             fillAllProfileInfo(profileData);
-        })
-        .then(reposUrl => {
-            getRepositories();
+            getRepositories(reposUrl)
+                .then(reposArray => fillRepositoriesSection(reposArray))
+                .catch(error => {
+                    console.log(`Error: ${error}`);
+                })
         })
         .catch(error => {
             console.log(`Error: ${error}`);
         })
 }
 
-/**
- * The function to extract information from reposList
- */
-async function getRepositories(n = 4) {
-}
 
 function fillAllProfileInfo(data) {
     fillProfileSection(data);
@@ -255,4 +251,78 @@ function fillTitleSection(data) {
 
     container.appendChild(aButton);
     titleSection.appendChild(container);
+}
+
+
+/**
+ * The function to extract reposList from url
+ */
+async function getRepositories(reposUrl, n = 4) {
+    try {
+        let response = await fetch(reposUrl);
+        let reposArr = await response.json();
+        return reposArr.slice(0, 4);
+    }
+    catch (error) {
+        console.log(`Error while Repos Loading: ${error}`);
+    }
+}
+
+function fillRepositoriesSection(arr) {
+
+    const repositoriesSection = document.querySelector('.repositoriesSection');
+
+    arr.forEach((repo) => {
+        let repoContainer = document.createElement('div');
+        repoContainer.classList.add('repository');
+
+        // prevent the case of no language or no description
+        let language = repo.language ?? 'Unknown';
+        let description = repo.description ?? 'No description provided.';
+        let languageColor = stringToColor(language);
+        let date = convertToTimeAgo(repo.updated_at);
+        
+        repoContainer.innerHTML = `
+                <div class="top">
+                    <div class="title">
+                        <h2>
+                            <i class="fa-solid fa-code"></i>
+                            <span>${repo.name}</span>
+                        </h2>
+                        <span class="tag" style="background-color: ${languageColor};">${language}</span>
+                    </div>
+                    <p>${description}</p>
+                </div>
+                <div class="bottom">
+                    <div class="status">
+                        <i class="fa-regular fa-star"></i>
+                        <p>${repo.stargazers_count}</p>
+                        <i class="fa-solid fa-chart-line"></i>
+                        <p>${repo.forks_count}</p>
+                    </div>
+                    <div class="date">${date}</div>
+                </div>
+        `
+        repositoriesSection.appendChild(repoContainer);
+    });
+}
+
+
+/**
+ * The function to get colors of each programming language
+ */
+function stringToColor(str) {
+    const colorMap = {
+        Python: "#3572A5",
+        Java: "#b07219",
+        C: "#5c6bc0",
+        JavaScript: "#f1e05a",
+        TypeScript: "#3178c6",
+        HTML: "#e34c26",
+        CSS: "#563d7c",
+        Dart: "#00B4AB"
+    };
+
+    // if the language is not mapped, return #0f4c75, the default color
+    return colorMap[str] || "#0f4c75";
 }
