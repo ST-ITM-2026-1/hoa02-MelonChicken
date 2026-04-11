@@ -109,12 +109,14 @@ function createStaticsContainer(icon, status, info) {
     }
     container.classList.add('staticsContainer');
     container.innerHTML = `
+    <div class="content">
     <div class="iconBox">
     <i class="fa-solid ${icon}"></i>
     </div>
     <div class="textBox">
     <h2 class="status">${status}</h2>
     <p class="info">${info}</p>
+    </div>
     </div>
     `
     return container;
