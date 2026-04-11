@@ -99,32 +99,39 @@ main {
             border-radius: var(--radius-md);
 
             display: flex;
-            justify-content: space-around;
+            justify-content: center;
             align-items: center;
             background-color: var(--color-surface);
 
-            .iconBox {
-                height: 30%;
-                aspect-ratio: 1 / 1;
-                border-radius: var(--radius-lg);
+            .content {
+                width: 60%;
+                height: 100%;
                 display: flex;
-                justify-content: center;
                 align-items: center;
+                .iconBox {
+                    height: 30%;
+                    aspect-ratio: 1 / 1;
+                    border-radius: var(--radius-lg);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
 
-                font-size: 1.5em;
-                color: var(--color-text-inverse);
-                background-color: var(--color-text-secondary);
-            }
-
-            .textBox {
-                .status {
-                    margin-bottom: 0;
-                    color: var(--color-accent);
+                    font-size: 1.5em;
+                    color: var(--color-text-inverse);
+                    background-color: var(--color-text-secondary);
                 }
 
-                .info {
-                    margin-top: 0;
-                    color: var(--color-text-secondary);
+                .textBox {
+                    margin-left: 2dvw;
+                    .status {
+                        margin-bottom: 0;
+                        color: var(--color-accent);
+                    }
+
+                    .info {
+                        margin-top: 0;
+                        color: var(--color-text-secondary);
+                    }
                 }
             }
         }
