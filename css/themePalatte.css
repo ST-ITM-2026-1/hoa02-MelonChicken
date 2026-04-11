@@ -18,6 +18,7 @@
   /* Border / Divider */
   --color-border: #cbd5e1;
   --color-divider: #cbd5e1;
+  --color-card-shadow: rgba(15, 23, 42, 0.06);
 
   /* Button */
   --color-button-primary-bg: var(--color-accent);
