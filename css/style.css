@@ -36,7 +36,7 @@ nav {
     div {
         width: 40%;
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(5, 1fr);
         gap: 2%;
         /* erase the dots of listed items */
 
