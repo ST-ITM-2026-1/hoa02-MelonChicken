@@ -57,11 +57,11 @@ html[data-theme="lab"] {
 
   /* Text */
   --color-text-primary: #d8f3ff;
-  --color-text-secondary: #8fb3c2;
+  --color-text-secondary: #8abfd6;
   --color-text-inverse: #041014;
 
   /* Accent */
-  --color-accent: #5ef2c2;
+  --color-accent: #23f5b2;
   --color-accent-hover: #7fffd4;
   --color-accent-soft: #12343a;
 
