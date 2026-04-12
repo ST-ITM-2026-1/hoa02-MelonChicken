@@ -45,4 +45,48 @@
 
   --shadow-sm: 0 2px 8px var(--color-card-shadow);
   --shadow-md: 0 8px 24px var(--color-card-shadow);
+  color: var(--color-text-primary);
+}
+
+/* for dark theme, I used data-* attribute to indicate current theme */
+/* https://developer.mozilla.org/en-US/docs/Web/HTML/How_to/Use_data_attributes */
+html[data-theme="lab"] {
+  /* Base */
+  --color-bg: #071118;
+  --color-surface: #0f1c24;
+
+  /* Text */
+  --color-text-primary: #d8f3ff;
+  --color-text-secondary: #8abfd6;
+  --color-text-inverse: #041014;
+
+  /* Accent */
+  --color-accent: #23f5b2;
+  --color-accent-hover: #56f7c8;
+  --color-accent-soft: #12343a;
+
+  /* Border / Divider */
+  --color-border: #294954;
+  --color-divider: #1a313a;
+  --color-card-shadow: rgba(0, 255, 200, 0.10);
+
+  /* Button */
+  --color-button-primary-bg: var(--color-accent);
+  --color-button-primary-bg-hover: var(--color-accent-hover);
+  --color-button-primary-text: #041014;
+
+  --color-button-secondary-bg: #0d1820;
+  --color-button-secondary-bg-hover: #13242d;
+  --color-button-secondary-text: var(--color-text-primary);
+  --color-button-secondary-border: var(--color-border);
+
+  /* Tag / Badge */
+  --color-badge-bg: #112b31;
+  --color-badge-text: #63e8c1;
+
+  /* Link */
+  --color-link: #7fffd4;
+  --color-link-hover: #b8ffec;
+
+  color: var(--color-text-primary);
 }
