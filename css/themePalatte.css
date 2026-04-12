@@ -62,11 +62,11 @@ html[data-theme="lab"] {
 
   /* Accent */
   --color-accent: #23f5b2;
-  --color-accent-hover: #7fffd4;
+  --color-accent-hover: #56f7c8;
   --color-accent-soft: #12343a;
 
   /* Border / Divider */
-  --color-border: #1f3a44;
+  --color-border: #294954;
   --color-divider: #1a313a;
   --color-card-shadow: rgba(0, 255, 200, 0.10);
 
@@ -82,7 +82,7 @@ html[data-theme="lab"] {
 
   /* Tag / Badge */
   --color-badge-bg: #112b31;
-  --color-badge-text: #7fffd4;
+  --color-badge-text: #63e8c1;
 
   /* Link */
   --color-link: #7fffd4;
