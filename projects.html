@@ -36,9 +36,9 @@
             </div>
         </nav>
     </header>
-   <button class="themeSwitch">
-    > STD_MODE
-   </button>
+    <button class="themeSwitch">
+        > STD_MODE
+    </button>
     <!-- main content for this page -->
     <main>
         <!-- container for title, description -->
@@ -56,9 +56,32 @@
                     See all works in Notion ⇾</a>
             </div>
         </section>
+        <div class="filterContainer">
+
+            <!-- Search -->
+            <div class="searchBox">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input id="searchInput" type="text" placeholder="Search projects...">
+            </div>
+            <!-- Category Filter -->
+            <div class="dropdown category filter">
+                <button>Category
+                    <i class="fa-solid fa-angle-down"></i>
+                </button>
+                <span class="dropdownContent"></span>
+            </div>
+            <!-- Status Filter -->
+            <div class="dropdown status filter">
+                <button>Status 
+                    <i class="fa-solid fa-angle-down"></i>
+                </button>
+                <span class="dropdownContent"></span>
+            </div>
+            <!-- Sort -->
+            <div class="sort"></div>
+        </div>
+
         <!-- container for featured projects list -->
-        <!-- Since there is no js, the contents will be hard-coded. -->
-        <!-- TODO: apply js and get real project information with GitHub REST API -->
         <section class="projectContainer">
             <div class="cardDeck">
                 <div class="card">
