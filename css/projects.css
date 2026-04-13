@@ -65,6 +65,79 @@ main {
         }
     }
 
+    .filterContainer {
+        width: 80%;
+        height: 6dvh;
+
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+
+        border-radius: var(--radius-md);
+        background-color: var(--color-surface);
+        box-shadow: var(--shadow-md);
+        border: 0.5px solid var(--color-border);
+
+        .searchBox:focus-within {
+            border: 3px solid var(--color-accent);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .searchBox {
+            width: 50%;
+            height: 70%;
+
+            display: flex;
+            align-items: center;
+            border-radius: var(--radius-md);
+
+            border: 0.5px solid var(--color-border);
+            color: var(--color-badge-text);
+            background-color: var(--color-badge-bg);
+            /* To look like the one container, use focus-within to searchBox and erase the input's default style */
+            /* https://developer.mozilla.org/ko/docs/Web/CSS/Reference/Selectors/:focus-within */
+            &:focus-within {
+                border: 2.5px solid var(--color-accent);
+            }
+
+            i {
+                width: max-content;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding-left: 0.5rem;
+                padding-right: 0.5rem;
+                background: transparent;
+            }
+
+            input {
+                width: 90%;
+                height: 90%;
+                border: none;
+                outline: none;
+                font-size: 16px;
+                background: transparent;
+            }
+        }
+
+        .filter {
+            width: 10%;
+            height: 70%;
+
+            button {
+                width: 100%;
+                height: 100%;
+                font-weight: 500;
+
+                border: 0.5px solid var(--color-border);
+                border-radius: var(--radius-sm);
+                color: var(--color-text-primary);
+                background-color: var(--color-surface);
+            }
+        }
+    }
+
     .projectContainer {
         width: 100%;
         height: 100dvh;
@@ -265,7 +338,7 @@ main {
                 .roles,
                 .stacks p,
                 .result p,
-                .cardContent > p {
+                .cardContent>p {
                     font-size: 0.92rem;
                 }
             }
