@@ -88,6 +88,9 @@ html[data-theme="lab"] {
   /* Link */
   --color-link: #7fffd4;
   --color-link-hover: #b8ffec;
+  --shadow-sm: 0 2px 8px var(--color-card-shadow);
+  --shadow-md: 0 8px 24px var(--color-card-shadow);
+  --shadow-lg: 0 14px 36px rgba(0, 255, 200, 0.5);
 
   color: var(--color-text-primary);
 }
