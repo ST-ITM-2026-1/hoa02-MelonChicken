@@ -66,7 +66,8 @@ main {
     }
 
     .filterContainer {
-        width: 80%;
+        width: 60%;
+        min-width: max-content;
         height: 6dvh;
 
         display: flex;
@@ -166,6 +167,7 @@ main {
             }
         }
 
+        /* style for sort button. Since there is no sort button now, just leave the style to use later */
         .sort {
             width: 10%;
             height: 70%;
