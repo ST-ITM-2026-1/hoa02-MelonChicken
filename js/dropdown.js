@@ -1,13 +1,14 @@
 document.addEventListener("DOMContentLoaded", init);
 
-let currentFilterdict = {
+let currentFilterDict = {
     category: [],
     status: [],
-    keyword: []
+    keyword: ""
 };
 
 function init() {
     // console.log("Lets start");
+    // 1. add dropdown filters
     let dropdownContents = document.querySelectorAll(".dropdownContent label");
     // console.log("dropdownContent: "+dropdownContents);
     dropdownContents.forEach(content => content.addEventListener("click", filterClick))
@@ -15,6 +16,10 @@ function init() {
     dropdowns.forEach(dropdown => {
         dropdown.addEventListener("click", dropdownClick);
     })
+
+    // 2. add event listener to search input
+    let searchInput = document.getElementById("searchInput");
+    searchInput.addEventListener("input", searchInputHandler);
 }
 
 function dropdownClick(clickedElement) {
@@ -66,53 +71,59 @@ function filterClick(clickedElement) {
 }
 
 function applyToList(name, id) {
-    let filterlist = currentFilterdict[name];
-    if (filterlist.includes(id)) {
-        filterlist.splice(filterlist.indexOf(id));
-    }
+    let filterlist = currentFilterDict[name];
 
-    else {
+    if (filterlist.includes(id)) {
+        filterlist.splice(filterlist.indexOf(id), 1);
+    } else {
         filterlist.push(id);
     }
 }
 
 function selectFilteredContent() {
     let projectcards = document.querySelectorAll(".card");
-    let selectedProjects = [];
-    let filterlist = currentFilterdict["category"].concat(currentFilterdict["status"], currentFilterdict["keyword"]);
-    let isAll = false;
-    if (filterlist.length == 0) {
-        isAll = true;
-    }
-    // console.log(filterlist);
+
     projectcards.forEach(projectcard => {
         let current = new Project(projectcard);
-        filterlist.forEach(keyword => {
-            if (current.toString().includes(keyword) || isAll) {
-                if (!selectedProjects.includes(projectcard)) {
-                    selectedProjects.push(projectcard);
-                }
-            }
-        })
-        projectcard.parentNode.style.display = "None";
-    })
 
-    if (isAll) {
-        projectcards.forEach(project => {
-            project.parentNode.style.display = "flex";
-        });
-    } else {
-        selectedProjects.forEach(project => {
-            project.parentNode.style.display = "flex";
-        });
-    }
+        // Determines whether the specified callback function returns true for any element of an array.
+        let matchesCategory =
+            currentFilterDict.category.length === 0 ||
+            currentFilterDict.category.some(category =>
+                current.categoryString.toLowerCase().includes(category.toLowerCase())
+            );
+
+        let matchesStatus =
+            currentFilterDict.status.length === 0 ||
+            currentFilterDict.status.some(status =>
+                current.categoryString.toLowerCase().includes(status.toLowerCase())
+            );
+
+        let matchesKeyword =
+            currentFilterDict.keyword === "" ||
+            current.toString().toLowerCase().includes(currentFilterDict.keyword);
+
+        if (matchesCategory && matchesStatus && matchesKeyword) {
+            projectcard.parentNode.style.display = "flex";
+        } else {
+            projectcard.parentNode.style.display = "none";
+        }
+    });
+}
+
+/**
+ * function to save the keyword
+ */
+function searchInputHandler(e) {
+    currentFilterDict.keyword = e.target.value.trim().toLowerCase();
+    selectFilteredContent();
 }
 
 class Project {
     name;
     content;
-    category;
-    categoryString;
+    status;
+    categories;
     stacks;
     result;
 
@@ -121,31 +132,39 @@ class Project {
     }
 
     loadInfo(element) {
-        this.name = element.getElementsByTagName("H3")[0].innerText;
+        this.name = element.getElementsByTagName("h3")[0].innerText;
         this.content = element.getElementsByTagName("p")[0].innerText;
-        this.category = [];
-        let metaGroups = element.getElementsByClassName("metaGroup")[0].getElementsByTagName("SPAN");
-        this.categoryString = "";
-        for(let i = 0; i < metaGroups.length; i++){
-            this.categoryString += metaGroups[i].innerText + " ";
-            this.category.push()
-        }
-        let stacksList = element.getElementsByClassName("stacks")[0].getElementsByTagName("P");
-        this.stacks = [];
 
-        for (let i = 0; i < stacksList.length; i++) {
-            this.stacks.push(stacksList[i].innerText);
+        this.status = "";
+        let statusBadge = element.querySelector(".statusBadge");
+        if (statusBadge) {
+            this.status = statusBadge.innerText.trim().toLowerCase();
         }
-        this.result = element.getElementsByClassName("result")[0].getElementsByTagName("P")[0].innerText;
+
+        this.categories = [];
+        let typeBadges = element.querySelectorAll(".typeBadge");
+        typeBadges.forEach(badge => {
+            this.categories.push(badge.innerText.trim().toLowerCase());
+        });
+
+        this.stacks = [];
+        let stacksList = element.querySelectorAll(".stacks p");
+        stacksList.forEach(stack => {
+            this.stacks.push(stack.innerText.trim());
+        });
+
+        let resultText = element.querySelector(".result p");
+        this.result = resultText ? resultText.innerText : "";
     }
 
     toString() {
-        let string = this.name + " " + this.content + " " + this.categoryString + " ";
-
-        this.stacks.forEach(stack => string += " " + stack);
-        string += " " + this.result;
-        // console.log(string);
-
-        return string;
+        return [
+            this.name,
+            this.content,
+            this.status,
+            this.categories,
+            this.stacks,
+            this.result
+        ].join(" ").toLowerCase();
     }
 }
