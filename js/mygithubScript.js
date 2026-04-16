@@ -7,6 +7,7 @@ let reposUrl;
  * The function to load GitHub Data and GitHub Repositories list
  */
 function init() {
+    const main = document.querySelector('.main');
     fetch(baseUrl)
         .then(response => response.json())
         .then(profileData => {
@@ -23,9 +24,11 @@ function init() {
         })
         .catch(error => {
             console.log(`Error: ${error}`);
+            main.appendChild(createErrorScreen());
         })
 }
 
+// FUnctions to consist the contents
 
 function fillAllProfileInfo(data) {
     fillProfileSection(data);
@@ -185,7 +188,7 @@ function filldetailSection(data) {
 
     const leftContainer = document.createElement('div');
     leftContainer.classList.add('leftContainer');
-    
+
     const rightContainer = document.createElement('div');
     rightContainer.classList.add('rightContainer');
 
@@ -293,7 +296,7 @@ async function getRepositories(reposUrl, n = 4) {
 }
 
 function fillRepositoriesSection(arr) {
-    
+
     const main = document.querySelector('.main');
     const repositoriesSection = document.createElement('section');
     repositoriesSection.classList.add('repositoriesSection');
@@ -307,7 +310,7 @@ function fillRepositoriesSection(arr) {
         let description = repo.description ?? 'No description provided.';
         let languageColor = stringToColor(language);
         let date = convertToTimeAgo(repo.updated_at);
-        
+
         repoContainer.innerHTML = `
                 <div class="top">
                     <div class="title">
@@ -352,4 +355,31 @@ function stringToColor(str) {
 
     // if the language is not mapped, return #0f4c75, the default color
     return colorMap[str] || "#0f4c75";
+}
+
+
+// Functions to handle errors
+
+function createErrorScreen() {
+    const errorSection = document.createElement('section');
+    errorSection.classList.add('errorScreen');
+    errorSection.innerHTML = ` 
+        <section class="errorSection">
+            <img src="res/imgs/spilling_coffee.png" alt="Spilled coffee illustration">
+
+            <h1>Oops... Failed to load <span>GitHub data</span></h1>
+
+            <p>Something seems to have gone wrong while communicating with the GitHub API.</p>
+            <p>Either the lab internet is on strike, or someone spilled coffee on the server.</p>
+
+            <div class="errorActions">
+                <button class="errorButton" onclick="location.reload()">Try Again</button>
+
+                <a class="errorLink" href="https://youtu.be/shZyg5VFI1Y?si=XN1rZZWOT7GxHMM3">
+                    Watch something while waiting →
+                </a>
+            </div>
+        </section>
+    `
+    return errorSection;
 }
