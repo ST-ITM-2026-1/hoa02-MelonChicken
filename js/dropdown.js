@@ -90,13 +90,13 @@ function selectFilteredContent() {
         let matchesCategory =
             currentFilterDict.category.length === 0 ||
             currentFilterDict.category.some(category =>
-                current.categoryString.toLowerCase().includes(category.toLowerCase())
+                current.toString().includes(category.toLowerCase())
             );
 
         let matchesStatus =
             currentFilterDict.status.length === 0 ||
             currentFilterDict.status.some(status =>
-                current.categoryString.toLowerCase().includes(status.toLowerCase())
+                current.toString().toLowerCase().includes(status.toLowerCase())
             );
 
         let matchesKeyword =
@@ -104,9 +104,9 @@ function selectFilteredContent() {
             current.toString().toLowerCase().includes(currentFilterDict.keyword);
 
         if (matchesCategory && matchesStatus && matchesKeyword) {
-            projectcard.parentNode.style.display = "flex";
+            projectcard.parentNode.parentNode.style.display = "flex";
         } else {
-            projectcard.parentNode.style.display = "none";
+            projectcard.parentNode.parentNode.style.display = "none";
         }
     });
 }
