@@ -84,7 +84,7 @@ function selectFilteredContent() {
     if (filterlist.length == 0) {
         isAll = true;
     }
-    console.log(filterlist);
+    // console.log(filterlist);
     projectcards.forEach(projectcard => {
         let current = new Project(projectcard);
         filterlist.forEach(keyword => {
@@ -144,7 +144,7 @@ class Project {
 
         this.stacks.forEach(stack => string += " " + stack);
         string += " " + this.result;
-        console.log(string);
+        // console.log(string);
 
         return string;
     }
