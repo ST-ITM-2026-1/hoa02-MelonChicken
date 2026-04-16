@@ -1,4 +1,4 @@
-.errorSection {
+.stateSection {
     width: 100%;
     height: 80vh;
 
@@ -6,14 +6,22 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
     img {
         width: 30%;
         aspect-ratio: 4 / 3;
         border-radius: var(--radius-sm);
     }
+
     h1 {
         font-size: 3rem;
         font-weight: 900;
+    }
+}
+
+.errorSection {
+    h1 {
+
         span {
             color: var(--color-error);
         }
