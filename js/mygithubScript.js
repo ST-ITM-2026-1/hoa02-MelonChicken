@@ -8,21 +8,30 @@ let reposUrl;
  */
 function init() {
     const main = document.querySelector('.main');
+    main.innerHTML = createLoadingSection();
     fetch(baseUrl)
         .then(response => response.json())
         .then(profileData => {
+            main.innerHTML = '';
             // console.log(profileData);
             // sort by the updated date
             //https://docs.github.com/en/rest/repos/repos?utm_source=chatgpt.com&apiVersion=2026-03-10 
             reposUrl = `${profileData.repos_url}?sort=updated&direction=desc`
             fillAllProfileInfo(profileData);
             getRepositories(reposUrl)
-                .then(reposArray => fillRepositoriesSection(reposArray))
+                .then(reposArray => {
+                    if(reposArray.length == 0){
+                        main.innerHTML = createEmptySection();
+                        return;
+                    }
+                    fillRepositoriesSection(reposArray);
+                })
                 .catch(error => {
                     console.log(`Error: ${error}`);
                 })
         })
         .catch(error => {
+            main.innerHTML = '';
             console.log(`Error: ${error}`);
             main.appendChild(createErrorScreen());
         })
@@ -364,8 +373,8 @@ function createErrorScreen() {
     const errorSection = document.createElement('section');
     errorSection.classList.add('errorScreen');
     errorSection.innerHTML = ` 
-        <section class="errorSection">
-            <img src="res/imgs/spilling_coffee.png" alt="Spilled coffee illustration">
+        <section class="stateSection errorSection">
+            <img src="res/gifs/Error_Coffee Spilled.gif" alt="Spilled coffee illustration">
 
             <h1>Oops... Failed to load <span>GitHub data</span></h1>
 
@@ -382,4 +391,26 @@ function createErrorScreen() {
         </section>
     `
     return errorSection;
+}
+
+function createLoadingSection() {
+    return `
+        <section class="stateSection loadingSection">
+            <img src="res/gifs/Live_chatbot.gif" alt="Loading illustration">
+            <h1>Preparing the <span>experiment</span>...</h1>
+            <p>The lab is currently fetching data from the GitHub API.</p>
+            <p>Please wait a moment while the beakers are still bubbling.</p>
+        </section>
+    `;
+}
+
+function createEmptySection() {
+    return `
+        <section class="stateSection emptySection">
+            <img src="res/gif/Empty_content.gif" alt="Empty result illustration">
+            <h1>No <span>repositories</span> found</h1>
+            <p>The experiment completed successfully, but there was nothing to display.</p>
+            <p>The lab shelves seem to be empty for now.</p>
+        </section>
+    `;
 }
