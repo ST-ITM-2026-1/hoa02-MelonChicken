@@ -7,25 +7,37 @@ let reposUrl;
  * The function to load GitHub Data and GitHub Repositories list
  */
 function init() {
+    const main = document.querySelector('.main');
+    main.innerHTML = createLoadingSection();
     fetch(baseUrl)
         .then(response => response.json())
         .then(profileData => {
+            main.innerHTML = '';
             // console.log(profileData);
             // sort by the updated date
             //https://docs.github.com/en/rest/repos/repos?utm_source=chatgpt.com&apiVersion=2026-03-10 
             reposUrl = `${profileData.repos_url}?sort=updated&direction=desc`
             fillAllProfileInfo(profileData);
             getRepositories(reposUrl)
-                .then(reposArray => fillRepositoriesSection(reposArray))
+                .then(reposArray => {
+                    if(reposArray.length == 0){
+                        main.innerHTML = createEmptySection();
+                        return;
+                    }
+                    fillRepositoriesSection(reposArray);
+                })
                 .catch(error => {
                     console.log(`Error: ${error}`);
                 })
         })
         .catch(error => {
+            main.innerHTML = '';
             console.log(`Error: ${error}`);
+            main.appendChild(createErrorScreen());
         })
 }
 
+// FUnctions to consist the contents
 
 function fillAllProfileInfo(data) {
     fillProfileSection(data);
@@ -38,7 +50,7 @@ function fillAllProfileInfo(data) {
  * The function to fill profile section 
  */
 function fillProfileSection(data) {
-    const profileSection = document.querySelector('.profileSection');
+    const main = document.querySelector('.main');
     let imageUrl = data.avatar_url;
     let username = data.name;
     let login = data.login;
@@ -49,7 +61,9 @@ function fillProfileSection(data) {
     if (100 < bio.length) {
         bio = bio.slice(100);
     }
-    profileSection.innerHTML = `
+    main.innerHTML += `
+    
+        <section class="profileSection">
     <img src="${imageUrl}" alt="profile">
             <div class="infoContainer">
                 <h1>${username}</h1>
@@ -60,6 +74,7 @@ function fillProfileSection(data) {
                 </div>
                 <p>${bio}</p>
             </div>
+        </section>
     `;
 }
 
@@ -68,7 +83,10 @@ function fillProfileSection(data) {
  * The function to fill statistics section 
  */
 function fillStaticsSection(data) {
-    const staticsSection = document.querySelector('.staticsSection');
+    const main = document.querySelector('.main');
+    const staticsSection = document.createElement('section');
+
+    staticsSection.classList.add('staticsSection');
 
     // public repos
     let icon = 'fa-book-bookmark';
@@ -92,6 +110,7 @@ function fillStaticsSection(data) {
     status = data.created_at;
     info = 'SINCE'
     staticsSection.appendChild(createStaticsContainer(icon, status, info));
+    main.appendChild(staticsSection);
 }
 
 /**
@@ -172,13 +191,21 @@ function convertToTimeAgo(dateString) {
  * The function to fill details section 
  */
 function filldetailSection(data) {
-    const leftContainer = document.querySelector('.leftContainer');
-    const rightContainer = document.querySelector('.rightContainer');
+    const main = document.querySelector('.main');
+    const detailSection = document.createElement('section');
+    detailSection.classList.add('detailSection');
+
+    const leftContainer = document.createElement('div');
+    leftContainer.classList.add('leftContainer');
+
+    const rightContainer = document.createElement('div');
+    rightContainer.classList.add('rightContainer');
 
     let name = data.name;
     let username = data.login;
     let affiliation = data.company;
     let base = data.location;
+
     // fill left container
     leftContainer.innerHTML = `     
     <h2>
@@ -228,6 +255,11 @@ function filldetailSection(data) {
             <a href="${data.html_url}">${data.html_url}</a>
         </div>
     </div>`
+
+    // append children
+    detailSection.appendChild(leftContainer);
+    detailSection.appendChild(rightContainer);
+    main.appendChild(detailSection);
 }
 
 
@@ -235,7 +267,9 @@ function filldetailSection(data) {
  * The function to fill details section 
  */
 function fillTitleSection(data) {
-    const titleSection = document.querySelector('.titleSection');
+    const main = document.querySelector('.main');
+    const titleSection = document.createElement('section');
+    titleSection.classList.add('titleSection');
     const h2Title = document.createElement('h2');
     h2Title.innerText = 'Latest Reporsitories';
     titleSection.appendChild(h2Title);
@@ -251,6 +285,8 @@ function fillTitleSection(data) {
 
     container.appendChild(aButton);
     titleSection.appendChild(container);
+
+    main.appendChild(titleSection);
 }
 
 
@@ -270,7 +306,9 @@ async function getRepositories(reposUrl, n = 4) {
 
 function fillRepositoriesSection(arr) {
 
-    const repositoriesSection = document.querySelector('.repositoriesSection');
+    const main = document.querySelector('.main');
+    const repositoriesSection = document.createElement('section');
+    repositoriesSection.classList.add('repositoriesSection');
 
     arr.forEach((repo) => {
         let repoContainer = document.createElement('div');
@@ -281,7 +319,7 @@ function fillRepositoriesSection(arr) {
         let description = repo.description ?? 'No description provided.';
         let languageColor = stringToColor(language);
         let date = convertToTimeAgo(repo.updated_at);
-        
+
         repoContainer.innerHTML = `
                 <div class="top">
                     <div class="title">
@@ -304,6 +342,7 @@ function fillRepositoriesSection(arr) {
                 </div>
         `
         repositoriesSection.appendChild(repoContainer);
+        main.appendChild(repositoriesSection);
     });
 }
 
@@ -325,4 +364,53 @@ function stringToColor(str) {
 
     // if the language is not mapped, return #0f4c75, the default color
     return colorMap[str] || "#0f4c75";
+}
+
+
+// Functions to handle errors
+
+function createErrorScreen() {
+    const errorSection = document.createElement('section');
+    errorSection.classList.add('errorScreen');
+    errorSection.innerHTML = ` 
+        <section class="stateSection errorSection">
+            <img src="res/imgs/spilling_coffee.png" alt="Spilled coffee illustration">
+
+            <h1>Oops... Failed to load <span>GitHub data</span></h1>
+
+            <p>Something seems to have gone wrong while communicating with the GitHub API.</p>
+            <p>Either the lab internet is on strike, or someone spilled coffee on the server.</p>
+
+            <div class="errorActions">
+                <button class="errorButton" onclick="location.reload()">Try Again</button>
+
+                <a class="errorLink" href="https://youtu.be/shZyg5VFI1Y?si=XN1rZZWOT7GxHMM3">
+                    Watch something while waiting →
+                </a>
+            </div>
+        </section>
+    `
+    return errorSection;
+}
+
+function createLoadingSection() {
+    return `
+        <section class="stateSection loadingSection">
+            <img src="res/gifs/loading-cat.gif" alt="Loading illustration">
+            <h1>Preparing the <span>experiment</span>...</h1>
+            <p>The lab is currently fetching data from the GitHub API.</p>
+            <p>Please wait a moment while the beakers are still bubbling.</p>
+        </section>
+    `;
+}
+
+function createEmptySection() {
+    return `
+        <section class="stateSection emptySection">
+            <img src="res/gifs/Empty_content.gif" alt="Empty result illustration">
+            <h1>No <span>repositories</span> found</h1>
+            <p>The experiment completed successfully, but there was nothing to display.</p>
+            <p>The lab shelves seem to be empty for now.</p>
+        </section>
+    `;
 }

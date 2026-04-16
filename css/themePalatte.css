@@ -14,6 +14,7 @@
   --color-accent: #0f4c75;
   --color-accent-hover: #0a3350;
   --color-accent-soft: #e2e8f0;
+  --color-error: rgb(255, 0, 0);
 
   /* Border / Divider */
   --color-border: #cbd5e1;
@@ -65,6 +66,7 @@ html[data-theme="lab"] {
   --color-accent: #23f5b2;
   --color-accent-hover: #56f7c8;
   --color-accent-soft: #12343a;
+  --color-error: rgb(255, 0, 0);
 
   /* Border / Divider */
   --color-border: #294954;
