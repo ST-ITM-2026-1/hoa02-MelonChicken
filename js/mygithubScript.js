@@ -38,7 +38,7 @@ function fillAllProfileInfo(data) {
  * The function to fill profile section 
  */
 function fillProfileSection(data) {
-    const profileSection = document.querySelector('.profileSection');
+    const main = document.querySelector('.main');
     let imageUrl = data.avatar_url;
     let username = data.name;
     let login = data.login;
@@ -49,7 +49,9 @@ function fillProfileSection(data) {
     if (100 < bio.length) {
         bio = bio.slice(100);
     }
-    profileSection.innerHTML = `
+    main.innerHTML += `
+    
+        <section class="profileSection">
     <img src="${imageUrl}" alt="profile">
             <div class="infoContainer">
                 <h1>${username}</h1>
@@ -60,6 +62,7 @@ function fillProfileSection(data) {
                 </div>
                 <p>${bio}</p>
             </div>
+        </section>
     `;
 }
 
@@ -68,7 +71,10 @@ function fillProfileSection(data) {
  * The function to fill statistics section 
  */
 function fillStaticsSection(data) {
-    const staticsSection = document.querySelector('.staticsSection');
+    const main = document.querySelector('.main');
+    const staticsSection = document.createElement('section');
+
+    staticsSection.classList.add('staticsSection');
 
     // public repos
     let icon = 'fa-book-bookmark';
@@ -92,6 +98,7 @@ function fillStaticsSection(data) {
     status = data.created_at;
     info = 'SINCE'
     staticsSection.appendChild(createStaticsContainer(icon, status, info));
+    main.appendChild(staticsSection);
 }
 
 /**
@@ -172,13 +179,21 @@ function convertToTimeAgo(dateString) {
  * The function to fill details section 
  */
 function filldetailSection(data) {
-    const leftContainer = document.querySelector('.leftContainer');
-    const rightContainer = document.querySelector('.rightContainer');
+    const main = document.querySelector('.main');
+    const detailSection = document.createElement('section');
+    detailSection.classList.add('detailSection');
+
+    const leftContainer = document.createElement('div');
+    leftContainer.classList.add('leftContainer');
+    
+    const rightContainer = document.createElement('div');
+    rightContainer.classList.add('rightContainer');
 
     let name = data.name;
     let username = data.login;
     let affiliation = data.company;
     let base = data.location;
+
     // fill left container
     leftContainer.innerHTML = `     
     <h2>
@@ -228,6 +243,11 @@ function filldetailSection(data) {
             <a href="${data.html_url}">${data.html_url}</a>
         </div>
     </div>`
+
+    // append children
+    detailSection.appendChild(leftContainer);
+    detailSection.appendChild(rightContainer);
+    main.appendChild(detailSection);
 }
 
 
@@ -235,7 +255,9 @@ function filldetailSection(data) {
  * The function to fill details section 
  */
 function fillTitleSection(data) {
-    const titleSection = document.querySelector('.titleSection');
+    const main = document.querySelector('.main');
+    const titleSection = document.createElement('section');
+    titleSection.classList.add('titleSection');
     const h2Title = document.createElement('h2');
     h2Title.innerText = 'Latest Reporsitories';
     titleSection.appendChild(h2Title);
@@ -251,6 +273,8 @@ function fillTitleSection(data) {
 
     container.appendChild(aButton);
     titleSection.appendChild(container);
+
+    main.appendChild(titleSection);
 }
 
 
@@ -269,8 +293,10 @@ async function getRepositories(reposUrl, n = 4) {
 }
 
 function fillRepositoriesSection(arr) {
-
-    const repositoriesSection = document.querySelector('.repositoriesSection');
+    
+    const main = document.querySelector('.main');
+    const repositoriesSection = document.createElement('section');
+    repositoriesSection.classList.add('repositoriesSection');
 
     arr.forEach((repo) => {
         let repoContainer = document.createElement('div');
@@ -304,6 +330,7 @@ function fillRepositoriesSection(arr) {
                 </div>
         `
         repositoriesSection.appendChild(repoContainer);
+        main.appendChild(repositoriesSection);
     });
 }
 
