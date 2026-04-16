@@ -311,6 +311,7 @@ function fillRepositoriesSection(arr) {
     repositoriesSection.classList.add('repositoriesSection');
 
     arr.forEach((repo) => {
+        let aHref = document.createElement('a');
         let repoContainer = document.createElement('div');
         repoContainer.classList.add('repository');
 
@@ -319,7 +320,7 @@ function fillRepositoriesSection(arr) {
         let description = repo.description ?? 'No description provided.';
         let languageColor = stringToColor(language);
         let date = convertToTimeAgo(repo.updated_at);
-
+        aHref.href = repo.html_url;
         repoContainer.innerHTML = `
                 <div class="top">
                     <div class="title">
@@ -341,7 +342,8 @@ function fillRepositoriesSection(arr) {
                     <div class="date">${date}</div>
                 </div>
         `
-        repositoriesSection.appendChild(repoContainer);
+        aHref.appendChild(repoContainer);
+        repositoriesSection.appendChild(aHref);
         main.appendChild(repositoriesSection);
     });
 }
