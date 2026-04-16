@@ -250,6 +250,12 @@ main {
                         border: 1px solid var(--color-border);
                         border-radius: var(--radius-md);
                     }
+
+                    span:first-child {
+                        font-weight: 700;
+                        color: var(--color-text-primary);
+                        background-color: var(--color-accent-soft);
+                    }
                 }
                 .roles {
                     width: max-content;
