@@ -111,7 +111,8 @@ function selectFilteredContent() {
 class Project {
     name;
     content;
-    roles;
+    category;
+    categoryString;
     stacks;
     result;
 
@@ -122,7 +123,13 @@ class Project {
     loadInfo(element) {
         this.name = element.getElementsByTagName("H3")[0].innerText;
         this.content = element.getElementsByTagName("p")[0].innerText;
-        this.roles = element.getElementsByClassName("roles")[0].innerText;
+        this.category = [];
+        let metaGroups = element.getElementsByClassName("metaGroup")[0].getElementsByTagName("SPAN");
+        this.categoryString = "";
+        for(let i = 0; i < metaGroups.length; i++){
+            this.categoryString += metaGroups[i].innerText + " ";
+            this.category.push()
+        }
         let stacksList = element.getElementsByClassName("stacks")[0].getElementsByTagName("P");
         this.stacks = [];
 
@@ -133,10 +140,11 @@ class Project {
     }
 
     toString() {
-        let string = this.name + " " + this.content + " " + this.roles + " ";
+        let string = this.name + " " + this.content + " " + this.categoryString + " ";
 
         this.stacks.forEach(stack => string += " " + stack);
         string += " " + this.result;
+        console.log(string);
 
         return string;
     }
