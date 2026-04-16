@@ -65,6 +65,129 @@ main {
         }
     }
 
+    .filterContainer {
+        width: 80%;
+        height: 6dvh;
+
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+
+        border-radius: var(--radius-md);
+        background-color: var(--color-surface);
+        box-shadow: var(--shadow-md);
+        border: 0.5px solid var(--color-border);
+
+        .searchBox:focus-within {
+            border: 3px solid var(--color-accent);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .searchBox {
+            width: 50%;
+            height: 70%;
+
+            display: flex;
+            align-items: center;
+            border-radius: var(--radius-md);
+
+            border: 0.5px solid var(--color-border);
+            color: var(--color-badge-text);
+            background-color: var(--color-badge-bg);
+
+            /* To look like the one container, use focus-within to searchBox and erase the input's default style */
+            /* https://developer.mozilla.org/ko/docs/Web/CSS/Reference/Selectors/:focus-within */
+            &:focus-within {
+                border: 2.5px solid var(--color-accent);
+            }
+
+            i {
+                width: max-content;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding-left: 0.5rem;
+                padding-right: 0.5rem;
+                background: transparent;
+            }
+
+            input {
+                width: 90%;
+                height: 90%;
+                border: none;
+                outline: none;
+                font-size: 16px;
+                background: transparent;
+            }
+        }
+
+        /* basic design of filter */
+        .filter {
+            width: 10%;
+            height: 70%;
+
+            button {
+                width: 100%;
+                height: 100%;
+                font-weight: 500;
+
+                border: 0.5px solid var(--color-border);
+                border-radius: var(--radius-sm);
+                color: var(--color-text-primary);
+                background-color: var(--color-surface);
+            }
+        }
+
+        /* style for dropdown contents */
+        .dropdown {
+            z-index: 3;
+            .dropdownContent {
+                width: 120%;
+                height: max-content;
+                display: none;
+                margin-top: 0.5dvh;
+                padding: 0.5dvw;
+                grid-template-rows: auto;
+                box-shadow: var(--shadow-md);
+                background-color: var(--color-surface);
+                border-radius: var(--radius-sm);
+
+                label {
+                    grid-row: span 1;
+                    padding-top: 1dvh;
+                    padding-bottom: 1dvh;
+                    border-radius: var(--radius-sm);
+                }
+
+                label:hover {
+                    background-color: var(--color-accent-soft);
+                }
+            }
+        }
+
+        .sort {
+            width: 10%;
+            height: 70%;
+
+            i {
+                margin-right: 0.5dvw;
+            }
+
+            button {
+                width: 100%;
+                height: 100%;
+                font-weight: 500;
+
+                border: 0.5px solid var(--color-border);
+                border-radius: var(--radius-sm);
+                color: var(--color-text-primary);
+                background-color: var(--color-accent-soft);
+            }
+        }
+
+    }
+
     .projectContainer {
         width: 100%;
         height: 100dvh;
@@ -113,7 +236,21 @@ main {
                         background-color: var(--color-accent-soft);
                     }
                 }
-
+                .metaGroup {
+                     span {
+                        width: max-content;
+                        padding-top: 0.2rem;
+                        padding-bottom: 0.2rem;
+                        padding-left: 0.4rem;
+                        padding-right: 0.4rem;
+                        margin-top: 0;
+                        margin-right: 0.3rem;
+                        background-color: var(--color-button-primary-bg);
+                        color: var(--color-button-primary-text);
+                        border: 1px solid var(--color-border);
+                        border-radius: var(--radius-md);
+                    }
+                }
                 .roles {
                     width: max-content;
                     padding: 0.5rem;
@@ -166,6 +303,19 @@ main {
                         border-radius: 5px;
                     }
                 }
+            }
+
+            .card:hover {
+                /* move card a little bit up */
+                /* https://developer.mozilla.org/ko/docs/Web/CSS/Reference/Properties/transform */
+                transform: translateY(-5px);
+
+                .cardTitleLine span {
+                    color: var(--color-button-secondary-bg-hover);
+                    background-color: var(--color-accent);
+                }
+
+                box-shadow: var(--shadow-lg)
             }
         }
     }
@@ -265,7 +415,7 @@ main {
                 .roles,
                 .stacks p,
                 .result p,
-                .cardContent > p {
+                .cardContent>p {
                     font-size: 0.92rem;
                 }
             }
