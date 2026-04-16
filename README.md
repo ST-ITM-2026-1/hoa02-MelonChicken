@@ -1,6 +1,8 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/oZexKI4n)
 # HOA02 
 
+## [Deployed URL](https://st-itm-2026-1.github.io/hoa02-MelonChicken/index.html)
+
 ## Enhancing Your Portfolio with JavaScript
 
 JAVASCRIPT INTERACTIVITY &amp; DYNAMIC CONTENT
