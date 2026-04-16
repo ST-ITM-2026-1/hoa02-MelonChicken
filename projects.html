@@ -17,6 +17,8 @@
     <link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUIT@2/fonts/static/woff2/SUIT.css" rel="stylesheet">
     <!-- script for theme switch -->
     <script src="js/themeSwitch.js"></script>
+    <!-- dropdown is for the interaction of dropdown -->
+    <script src="js/dropdown.js"></script>
 </head>
 
 <body>
@@ -36,9 +38,9 @@
             </div>
         </nav>
     </header>
-   <button class="themeSwitch">
-    > STD_MODE
-   </button>
+    <button class="themeSwitch">
+        > STD_MODE
+    </button>
     <!-- main content for this page -->
     <main>
         <!-- container for title, description -->
@@ -56,9 +58,76 @@
                     See all works in Notion ⇾</a>
             </div>
         </section>
+        <div class="filterContainer">
+
+            <!-- Search -->
+            <div class="searchBox">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input id="searchInput" type="text" placeholder="Search projects...">
+            </div>
+            <!-- Category Filter -->
+            <div class="dropdown filter">
+                <button>Category
+                    <i class="fa-solid fa-angle-down"></i>
+                </button>
+                <span class="dropdownContent">
+                    <!-- To use more easy to use by user (click text, click checkbox will result in same result), I utilized the label -->
+                    <!-- https://developer.mozilla.org/ko/docs/Web/HTML/Reference/Elements/label -->
+                    <label>
+                        <input type="checkbox" name="category" id="Web" />
+                        Web
+                    </label>
+                    <label>
+                        <input type="checkbox" name="category" id="App" />
+                        App
+                    </label>
+                    <label>
+                        <input type="checkbox" name="category" id="ML" />
+                        ML
+                    </label>
+                    <label>
+                        <input type="checkbox" name="category" id="Data" />
+                        Data
+                    </label>
+                    <label>
+                        <input type="checkbox" name="category" id="Research" />
+                        Research
+                    </label>
+
+                </span>
+            </div>
+            <!-- Status Filter -->
+            <div class="dropdown filter">
+                <button>Status
+                    <i class="fa-solid fa-angle-down"></i>
+                </button>
+                <span class="dropdownContent">
+                    <!-- https://developer.mozilla.org/ko/docs/Web/HTML/Reference/Elements/label -->
+                    <label>
+                        <input type="checkbox" name="status" id="Completed" />
+                        Completed
+                    </label>
+                    <label>
+                        <input type="checkbox" name="status" id="WIP" />
+                        WIP
+                    </label>
+                    <label>
+                        <input type="checkbox" name="status" id="Idea" />
+                        Idea
+                    </label>
+                    <label>
+                        <input type="checkbox" name="status" id="Archived" />
+                        Archived
+                    </label>
+                </span>
+            </div>
+            <!-- Sort -->
+            <div class="sort">
+                <button><i class="fa-regular fa-clock"></i>To Latest</button>
+            </div>
+        </div>
+
         <!-- container for featured projects list -->
-        <!-- Since there is no js, the contents will be hard-coded. -->
-        <!-- TODO: apply js and get real project information with GitHub REST API -->
         <section class="projectContainer">
             <div class="cardDeck">
                 <div class="card">
@@ -69,10 +138,20 @@
                                 <i class="fa-solid fa-eye"></i>
                             </span>
                         </span>
-                        <p>A learning CV project that classifies camera-trap images using HOG + scikit-learn
-                            probabilistic
-                            models, validated with site-grouped CV and completed through a full submission cycle.</p>
-                        <p class="roles">Solo: data • model • CV design</p>
+
+                        <div class="metaGroup">
+                            <span class="statusBadge">Completed</span>
+                            <span class="typeBadge">CV</span>
+                            <span class="typeBadge">ML</span>
+                            <span class="typeBadge">Research</span>
+                        </div>
+
+                        <p class="description">
+                            A learning CV project that classifies camera-trap images using HOG + scikit-learn
+                            probabilistic models, validated with site-grouped CV and completed through a full submission
+                            cycle.
+                        </p>
+
                         <span class="stacks">
                             <p>Python</p>
                             <p>Scikit-learn</p>
@@ -80,155 +159,12 @@
                             <p>OpenCV</p>
                         </span>
                     </div>
-
                     <div class="result">
                         <div class="dot"></div>
                         <p>Local CV best (mean log loss): 1.8197 (355/582)</p>
                     </div>
                 </div>
             </div>
-            <div class="cardDeck">
-                <div class="card">
-                    <div class="cardContent">
-
-                        <span class="cardTitleLine">
-                            <h3>Research Radar</h3>
-                            <span>
-                                <i class="fa-solid fa-chart-line"></i>
-                            </span>
-                        </span>
-                        <p>AI Market Intelligence Dashboard, Automated exploration system converting consulting research
-                            into opportunities.</p>
-                        <p class="roles">Solo: Full-stack Dev • Data Analysis • Project Management</p>
-                        <span class="stacks">
-                            <p>Python</p>
-                            <p>FastAPI</p>
-                            <p>OpenAI API</p>
-                            <p>NLP</p>
-                        </span>
-                    </div>
-                    <div class="result">
-                        <div class="dot"></div>
-                        <p>Developed a prototype of AI-powered market insight automation dashboard</p>
-                    </div>
-                </div>
-            </div>
-            <div class="cardDeck">
-                <div class="card">
-                    <div class="cardContent">
-                        <span class="cardTitleLine">
-                            <h3>F1 QNA Bot</h3>
-                            <span>
-                                <i class="fas fa-robot"></i>
-                            </span>
-                        </span>
-                        <p>Chatbot that uses RAG to answer complex F1 regulations and racing data in a simple,
-                            searchable way.</p>
-                        <p class="roles">Built RAG-based Chatbot Pipeline</p>
-                        <span class="stacks">
-                            <p>Python</p>
-                            <p>PyTorch</p>
-                            <p>LLM</p>
-                        </span>
-                    </div>
-                    <div class="result">
-                        <div class="dot"></div>
-                        <p>Provides accurate answers to F1-related queries (in progress)</p>
-                    </div>
-                </div>
-            </div>
-            <div class="cardDeck">
-                <div class="card">
-                    <div class="cardContent">
-                        <span class="cardTitleLine">
-                            <h3>ITM Notification</h3>
-                            <span>
-                                <i class="fas fa-bell"></i>
-                            </span>
-                        </span>
-                        <p>Automatic notification system that delivers school announcements in real time.</p>
-                        <p class="roles">Python Bot Dev &amp; Discord Integration</p>
-                        <span class="stacks">
-                            <p>Python</p>
-                            <p>FastAPI</p>
-                            <p>Discord API</p>
-                        </span>
-                    </div>
-                    <div class="result">
-                        <div class="dot"></div>
-                        <p>Increased engagement and visibility through real-time announcement alerts</p>
-                    </div>
-                </div>
-            </div>
-            <div class="cardDeck">
-                <div class="card">
-                    <div class="cardContent">
-                        <span class="cardTitleLine">
-                            <h3>GovPulse</h3>
-                            <span>
-                                <i class="fas fa-server"></i>
-                            </span>
-                        </span>
-                        <p>Dashboard that visualizes government server failures and recovery status in real time.</p>
-                        <p class="roles">FastAPI Backend &amp; Monitoring Dashboard</p>
-                        <span class="stacks">
-                            <p>FastAPI</p>
-                            <p>Python</p>
-                        </span>
-                    </div>
-                    <div class="result">
-                        <div class="dot"></div>
-                        <p>Deployed a real-time service for tracking and visualizing server recovery status</p>
-                    </div>
-                </div>
-            </div>
-            <div class="cardDeck">
-                <div class="card">
-                    <div class="cardContent">
-                        <span class="cardTitleLine">
-                            <h3>HaBi</h3>
-                            <span>
-                                <i class="fas fa-calendar-check"></i>
-                            </span>
-                        </span>
-                        <p>Service prototype for integrating and managing schedules scattered across multiple apps.</p>
-                        <p class="roles">Flutter App Dev &amp; Backend Integration</p>
-                        <span class="stacks">
-                            <p>Flutter</p>
-                            <p>FastAPI</p>
-                        </span>
-                    </div>
-                    <div class="result">
-                        <div class="dot"></div>
-                        <p>Built an integrated schedule management prototype (archived)</p>
-                    </div>
-                </div>
-            </div>
-            <div class="cardDeck">
-                <div class="card">
-                    <div class="cardContent">
-                        <span class="cardTitleLine">
-                            <h3>Smart Bath</h3>
-                            <span>
-                                <i class="fas fa-bath"></i>
-                            </span>
-                        </span>
-                        <p>Integrated platform that helps users and caregivers easily explore visiting bath services.
-                        </p>
-                        <p class="roles">Frontend Dev &amp; Platform Architecture</p>
-                        <span class="stacks">
-                            <p>React</p>
-                            <p>TypeScript</p>
-                            <p>Firebase</p>
-                        </span>
-                    </div>
-                    <div class="result">
-                        <div class="dot"></div>
-                        <p>Reduced search time and improved accessibility for visiting bath service information</p>
-                    </div>
-                </div>
-            </div>
-            <div class="cardDeck"></div>
         </section>
     </main>
     <!-- footer to indicate the information of this site -->
