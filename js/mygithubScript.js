@@ -374,7 +374,7 @@ function createErrorScreen() {
     errorSection.classList.add('errorScreen');
     errorSection.innerHTML = ` 
         <section class="stateSection errorSection">
-            <img src="res/gifs/Error_Coffee Spilled.gif" alt="Spilled coffee illustration">
+            <img src="res/imgs/spilling_coffee.png" alt="Spilled coffee illustration">
 
             <h1>Oops... Failed to load <span>GitHub data</span></h1>
 
@@ -396,7 +396,7 @@ function createErrorScreen() {
 function createLoadingSection() {
     return `
         <section class="stateSection loadingSection">
-            <img src="res/gifs/Live_chatbot.gif" alt="Loading illustration">
+            <img src="res/gifs/loading-cat.gif" alt="Loading illustration">
             <h1>Preparing the <span>experiment</span>...</h1>
             <p>The lab is currently fetching data from the GitHub API.</p>
             <p>Please wait a moment while the beakers are still bubbling.</p>
@@ -407,7 +407,7 @@ function createLoadingSection() {
 function createEmptySection() {
     return `
         <section class="stateSection emptySection">
-            <img src="res/gif/Empty_content.gif" alt="Empty result illustration">
+            <img src="res/gifs/Empty_content.gif" alt="Empty result illustration">
             <h1>No <span>repositories</span> found</h1>
             <p>The experiment completed successfully, but there was nothing to display.</p>
             <p>The lab shelves seem to be empty for now.</p>
