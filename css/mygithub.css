@@ -355,5 +355,18 @@ main {
                 }
             }
         }
+        
+            .repository:hover {
+                /* move card a little bit up */
+                /* https://developer.mozilla.org/ko/docs/Web/CSS/Reference/Properties/transform */
+                transform: translateY(-5px);
+
+                .cardTitleLine span {
+                    color: var(--color-button-secondary-bg-hover);
+                    background-color: var(--color-accent);
+                }
+
+                box-shadow: var(--shadow-lg)
+            }
     }
 }
